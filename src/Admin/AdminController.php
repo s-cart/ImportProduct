@@ -67,8 +67,8 @@ class AdminController extends Controller
             try {
             //Create or update product
             $dataInsert['image']        = $row['image'] ?? '';
-            $dataInsert['brand_id']     = (int)$row['brand_id'] ?? 0;
-            $dataInsert['supplier_id']  = (int)$row['supplier_id'] ?? 0;
+            $dataInsert['brand_id']     = $row['brand_id'] ?? 0;
+            $dataInsert['supplier_id']  = $row['supplier_id'] ?? 0;
             $dataInsert['price']        = (int)$row['price'] ?? 0;
             $dataInsert['cost']         = (int)$row['cost'] ?? 0;
             $dataInsert['stock']        = (int)$row['stock'] ?? 0;
