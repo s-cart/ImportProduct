@@ -96,7 +96,8 @@ class AdminController extends Controller
 
 
             //Update sub image
-            $arrImages = array_filter(explode(',', $row['sub-images']));
+            $subImages = str_replace("\n","",$row['sub-images']);
+            $arrImages = array_filter(explode(',', $subImages));
             $product->images()->delete();
             if(count($arrImages)) {
                 $imagesMap = array_map(function($v){
