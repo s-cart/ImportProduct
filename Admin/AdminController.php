@@ -69,21 +69,25 @@ class AdminController extends Controller
             $dataInsert['image']        = $row['image'] ?? '';
             $dataInsert['brand_id']     = $row['brand_id'] ?? 0;
             $dataInsert['supplier_id']  = $row['supplier_id'] ?? 0;
-            $dataInsert['price']        = (int)$row['price'] ?? 0;
-            $dataInsert['cost']         = (int)$row['cost'] ?? 0;
-            $dataInsert['stock']        = (int)$row['stock'] ?? 0;
-            $dataInsert['minimum']      = (int)$row['minimum'] ?? 0;
+            $dataInsert['price']        = (int)($row['price'] ?? 0);
+            $dataInsert['cost']         = (int)($row['cost'] ?? 0);
+            $dataInsert['stock']        = (int)($row['stock'] ?? 0);
+            $dataInsert['minimum']      = (int)($row['minimum'] ?? 0);
             $dataInsert['weight_class'] = $row['weight_class'] ?? '';
-            $dataInsert['weight']       = (int)$row['weight'] ?? 0;
+            $dataInsert['weight']       = (int)($row['weight'] ?? 0);
             $dataInsert['length_class'] = $row['length_class'] ?? '';
-            $dataInsert['length']       = (int)$row['length'] ?? 0;
-            $dataInsert['width']        = (int)$row['width'] ?? 0;
-            $dataInsert['height']       = (int)$row['height'] ?? 0;
-            $dataInsert['kind']         = (int)$row['kind'] ?? 0;
-            $dataInsert['tax_id']       = (int)$row['tax_id'] ?? 0;
-            $dataInsert['status']       = (int)$row['status'] ?? 0;
-            $dataInsert['alias']        = $row['alias'] ?? '';
+            $dataInsert['length']       = (int)($row['length'] ?? 0);
+            $dataInsert['width']        = (int)($row['width'] ?? 0);
+            $dataInsert['height']       = (int)($row['height'] ?? 0);
+            $dataInsert['kind']         = (int)($row['kind'] ?? 0);
+            $dataInsert['tax_id']       = (int)($row['tax_id'] ?? 0);
+            $dataInsert['status']       = (int)($row['status'] ?? 0);
             $dataInsert['sort']         = (int)$row['sort'] ?? 0;
+
+            $alias = $row['alias'] ?? ($row['name'] ?? '');
+            $alias = sc_word_format_url($alias);
+            $dataInsert['alias'] = sc_word_limit($alias, 100);
+            
             $product = ShopProduct::updateOrCreate(
                 ['sku' => $row['sku']],
                 $dataInsert,
