@@ -90,7 +90,8 @@ class AdminController extends Controller
             );
 
             //Update category
-            $arrCategory = array_filter(explode(',', $row['categories']));
+            $listCategories = str_replace("\n","",$row['categories']);
+            $arrCategory = array_filter(explode(',', $listCategories));
             $product->categories()->detach();
             $product->categories()->attach($arrCategory);
 
