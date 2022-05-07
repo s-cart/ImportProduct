@@ -87,7 +87,7 @@ class AdminController extends Controller
             $alias = $row['alias'] ?? ($row['name'] ?? '');
             $alias = sc_word_format_url($alias);
             $dataInsert['alias'] = sc_word_limit($alias, 100);
-            
+
             $product = ShopProduct::updateOrCreate(
                 ['sku' => $row['sku']],
                 $dataInsert,
@@ -163,10 +163,15 @@ class AdminController extends Controller
             }
             $lang = $row['lang'] ?? 'en';
             try {
-            $dataInsert['name'] = $row['name'] ?? '';
-            $dataInsert['keyword'] = $row['keyword'] ?? '';
-            $dataInsert['description'] = $row['description'] ?? '';
-            $dataInsert['content'] = $row['content'] ?? '';
+            $description = strip_tags(($row['description'] ?? ''));
+            $name = strip_tags(($row['name'] ?? ''));
+            $keyword = strip_tags(($row['keyword'] ?? ''));
+            $content = strip_tags(($row['content'] ?? ''));
+            $content = str_replace("\n","<br>", $content);
+            $dataInsert['name'] = $name;
+            $dataInsert['keyword'] = $keyword;
+            $dataInsert['description'] = $description;
+            $dataInsert['content'] = $content;
             
             ShopProductDescription::updateOrCreate(
                 ['product_id' => $product->id, 'lang' => $lang],
