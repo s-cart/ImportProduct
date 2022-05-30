@@ -85,6 +85,7 @@ class AdminController extends Controller
             $dataInsert['sort']         = (int)$row['sort'] ?? 0;
 
             $alias = $row['alias'] ?? ($row['name'] ?? '');
+            $alias = str_replace([" ","."],["-","-"],$alias);
             $alias = sc_word_format_url($alias);
             $dataInsert['alias'] = sc_word_limit($alias, 100);
 
